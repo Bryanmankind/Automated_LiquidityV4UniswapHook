@@ -1,4 +1,7 @@
 Write a method that creates a liquidity pool
 
 - write a method that adds liquidity to the pool 
-- Add access control the functions 
+- Keep a track depoyed pools
+- make the startingPrice dynamic
+- manager address shoud not be hardcoded 
+- Add access control to the functions 
