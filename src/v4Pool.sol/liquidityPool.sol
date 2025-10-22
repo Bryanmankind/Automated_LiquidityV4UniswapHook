@@ -18,7 +18,7 @@ contract LiquidityPool {
     address public manager = 0x1F98431c8aD98523631AE4a59f267346ea31F984; // Uniswap V4 Pool Manager address
     uint160 public startingPrice = 79228162514264337593543950336; // 1:1 price ratio in Q64.96 format
 
-    event PoolCreated(bytes32 indexed poolId, address hookContract);
+    event PoolCreated(bytes32 indexed poolId, int24 initialTick, address hookContract);
 
     constructor(
         address _token0,
@@ -33,7 +33,7 @@ contract LiquidityPool {
     }
 
 
-    function createPool(address hookContract) external {
+    function createPool(address hookContract) external returns (int24 tick) {
 
         // Sort tokens
         (token0, token1) = token0 < token1 ? (token0, token1) : (token1, token0);
@@ -46,13 +46,13 @@ contract LiquidityPool {
         hooks: IHooks(hookContract)
      });
 
-        IPoolManager(manager).initialize(pool, startingPrice);
+        tick = IPoolManager(manager).initialize(pool, startingPrice);
 
         PoolId poolId = PoolIdLibrary.toId(pool);
 
         bytes32 id = PoolId.unwrap(poolId);
 
-        emit PoolCreated(id, hookContract);
+        emit PoolCreated(id, tick, hookContract);
     }
    
 }   
