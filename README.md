@@ -1,19 +1,31 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## LiquidityV4UniswapHook
 
-Foundry consists of:
+A hands-on learning project that demonstrates how to create and manage liquidity pools using Uniswap v4’s core architecture.
+This project focuses on building a custom Solidity contract that integrates with Uniswap v4’s v4-core libraries to deploy pools and add liquidity programmatically, helping developers understand the inner workings of the next-generation AMM design.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Overview
 
-## Documentation
+Uniswap v4 introduces a new level of flexibility through Hooks, Singleton Pools, and customizable liquidity logic.
+This project serves as an educational sandbox to explore how pools are created and how liquidity can be added directly through smart contracts.
 
-https://book.getfoundry.sh/
+The contract implements:
 
-## Usage
+A function to create liquidity pools via PoolManager and PoolKey.
+
+A function to add liquidity to an existing pool.
+
+Examples of pool initialization using sqrtPriceX96 for different token ratios.
+
+## Key Concepts
+
+PoolKey: Defines the unique identity of each pool (pair, fee, and tick spacing).
+
+PoolManager: Central entry point for creating and managing pools.
+
+Liquidity Management: Adding or removing liquidity using precise tick ranges.
+
+Hooks: Extend pool behavior without forking Uniswap v4.
 
 ### Build
 
@@ -64,3 +76,8 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+### 🧑‍💻 Author
+
+Bryan Conquer
+Blockchain Smart Contract Developer
