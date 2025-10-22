@@ -5,6 +5,7 @@ import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {IHooks} from "v4-core/src/interfaces/IHooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {Currency} from "v4-core/src/types/Currency.sol";
+import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 
 
 contract LiquidityPool {
@@ -17,6 +18,7 @@ contract LiquidityPool {
     address public manager = 0x1F98431c8aD98523631AE4a59f267346ea31F984; // Uniswap V4 Pool Manager address
     uint160 public startingPrice = 79228162514264337593543950336; // 1:1 price ratio in Q64.96 format
 
+    event PoolCreated(bytes32 indexed poolId, address hookContract);
 
     constructor(
         address _token0,
@@ -33,9 +35,6 @@ contract LiquidityPool {
 
     function createPool(address hookContract) external {
 
-        require(token0 != address(0), 'ZERO_ADDRESS');
-        require(token0 != token1, "Identical tokens");
-
         // Sort tokens
         (token0, token1) = token0 < token1 ? (token0, token1) : (token1, token0);
 
@@ -48,6 +47,12 @@ contract LiquidityPool {
      });
 
         IPoolManager(manager).initialize(pool, startingPrice);
+
+        PoolId poolId = PoolIdLibrary.toId(pool);
+
+        bytes32 id = PoolId.unwrap(poolId);
+
+        emit PoolCreated(id, hookContract);
     }
    
 }   
