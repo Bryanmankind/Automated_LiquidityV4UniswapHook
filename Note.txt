@@ -1,0 +1,3 @@
+Write a methode that creates a liquidity pool
+
+- write a methode that adds liquidity to the pool 
