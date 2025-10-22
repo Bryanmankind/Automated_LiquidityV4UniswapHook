@@ -29,6 +29,16 @@ Hooks: Extend pool behavior without forking Uniswap v4.
 
 ### Build
 
+```
+$ git clone https://github.com/Bryanmankind/Automated_LiquidityV4UniswapHookk.git
+
+$ cd Automated_LiquidityV4UniswapHook
+
+$ forge install
+```
+
+
+
 ```shell
 $ forge build
 ```
